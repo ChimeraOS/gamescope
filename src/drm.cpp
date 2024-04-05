@@ -107,6 +107,13 @@ static uint32_t legion_go_display_rates[] =
 	144,
 };
 
+static uint32_t loki_display_rates[] =
+{
+	40,
+	50,
+	60,
+};
+
 static uint32_t get_conn_display_info_flags(struct drm_t *drm, struct connector *connector)
 {
 	if (!connector)
@@ -921,6 +928,8 @@ static void parse_edid( drm_t *drm, struct connector *conn)
 			conn->valid_display_rates = std::span(steam_deck_display_rates);
 		} else if ( strcmp(conn->make_pnp, "LEN") == 0 && strcmp(conn->model, "Go Display") == 0 ) {
 			conn->valid_display_rates = std::span(legion_go_display_rates);
+		} else if ( strcmp(conn->make_pnp, "AYN") == 0 && strcmp(conn->model, "LK-GOLDSPV58") == 0 ) {
+			conn->valid_display_rates = std::span(loki_display_rates);
 		}
 	}
 
