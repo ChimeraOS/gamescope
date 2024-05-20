@@ -272,6 +272,9 @@ static void wlserver_perform_rel_pointer_motion(double unaccel_dx, double unacce
 	auto server = steamcompmgr_get_focused_server();
 	if ( server != NULL )
 	{
+		unaccel_dx *= g_mouseSensitivity;
+		unaccel_dy *= g_mouseSensitivity;
+
 		server->ctx->accum_x += unaccel_dx;
 		server->ctx->accum_y += unaccel_dy;
 
@@ -1870,15 +1873,7 @@ void wlserver_mousefocus( struct wlr_surface *wlrsurface, int x /* = 0 */, int y
 
 void wlserver_mousemotion( int x, int y, uint32_t time )
 {
-	assert( wlserver_is_lock_held() );
-
-	// TODO: Pick the xwayland_server with active focus
-	auto server = steamcompmgr_get_focused_server();
-	if ( server != NULL )
-	{
-		XTestFakeRelativeMotionEvent( server->get_xdisplay(), x, y, CurrentTime );
-		XFlush( server->get_xdisplay() );
-	}
+	wlserver_perform_rel_pointer_motion( x, y );
 }
 
 void wlserver_mousewarp( int x, int y, uint32_t time )

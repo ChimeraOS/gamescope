@@ -60,6 +60,7 @@ const struct option *gamescope_options = (struct option[]){
 	{ "rt", no_argument, nullptr, 0 },
 	{ "prefer-vk-device", required_argument, 0 },
 	{ "expose-wayland", no_argument, 0 },
+	{ "mouse-sensitivity", required_argument, nullptr, 's'},
 
 	{ "headless", no_argument, 0 },
 
@@ -161,6 +162,7 @@ const char usage[] =
 	"  --sharpness, --fsr-sharpness   upscaler sharpness from 0 (max) to 20 (min)\n"
 	"  --expose-wayland               support wayland clients using xdg-shell\n"
 	"  --headless                     use headless backend (no window, no DRM output)\n"
+	"  -s, --mouse-sensitivity        multiply mouse movement by given decimal number\n"
 	"  --cursor                       path to default cursor image\n"
 	"  -R, --ready-fd                 notify FD when ready\n"
 	"  --rt                           Use realtime scheduling\n"
@@ -270,6 +272,8 @@ bool g_bIsNested = false;
 bool g_bHeadless = false;
 
 bool g_bGrabbed = false;
+
+float g_mouseSensitivity = 1.0;
 
 bool g_bExternalForced = false;
 
@@ -653,6 +657,9 @@ int main(int argc, char **argv)
 				break;
 			case 'g':
 				g_bGrabbed = true;
+				break;
+			case 's':
+				g_mouseSensitivity = atof( optarg );
 				break;
 			case 0: // long options without a short option
 				opt_name = gamescope_options[opt_index].name;
