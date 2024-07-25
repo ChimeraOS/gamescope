@@ -2311,7 +2311,6 @@ namespace gamescope
 
 		if ( g_customRefreshRates.size() > 0 && ( GetScreenType() == GAMESCOPE_SCREEN_TYPE_INTERNAL || g_bExternalForced ) ) {
 			m_Mutable.ValidDynamicRefreshRates = std::span(g_customRefreshRates);
-			return;
 		}
 	}
 
