@@ -359,6 +359,7 @@ static gamescope::GamescopeModeGeneration parse_gamescope_mode_generation( const
 }
 
 bool g_bUseRotationShader = false;
+bool g_bEnableDRMRotationShader = false;
 
 GamescopePanelOrientation g_DesiredInternalOrientation = GAMESCOPE_PANEL_ORIENTATION_AUTO;
 static GamescopePanelOrientation force_orientation(const char *str)

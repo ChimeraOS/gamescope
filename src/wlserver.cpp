@@ -2646,7 +2646,7 @@ static void apply_touchscreen_orientation(double *x, double *y )
         }
     }
 
-	if (g_bUseRotationShader) {
+	if (g_bEnableDRMRotationShader) {
 		tx = 1.0 - *y;
 		ty = *x;
 	}
